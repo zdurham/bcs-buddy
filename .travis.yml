@@ -1,17 +1,17 @@
 language: node_js
 node_js:
-  - stable
+- stable
 cache:
   directories:
-    - node_modules
+  - node_modules
 before_script: cd server
 script:
-  - echo "skipping tests"
+- echo "skipping tests"
 install: true
 deploy:
   provider: heroku
   api_key:
-    secure: Hldz75ZcgkuiEsibVrb2tJJygm5ydhGAwzdcWhF1uR9XHiGdboD2MJ21njzT4LYJVuLQjFvJSutyj5WvPNz5V2jtWL8kZV4GoW/lZtLX8LM9Wdh5UX1uMdt95twmZFvvC2YKjxz8m+QnR/w8SYQBEDCgHesvcv5gLwFlTmsb4GtuZf1Z1vbg3UEbGFMO8/itvLYkAPguWyQBDw91CVuZ6Ftm+/sf5r36q5XHiSi0qq0YFabfvlmFeZvO6E5tVTvzBMhzKcNEFVhpKsm2+zc9QMbWJxbKH4ary7ssp5X0tB9GQslTVNJJjpzSwTuycCzUYtbqwu02rtZKUr3Zgi+gv0DqI6GI1L0n3vVJUiJ3K4tcxDiYPuuWrR7sUg79bt/YcO7HACZe6dC4rsUthbP+hPuhQWZDnOrZF4Ms/tLYwYeUqhXgswALBlmWF9gbgUbRCD6BhQXLOxc8XFiVdrjyZIRqsAe2SWrK4UccCCVy+8QjMA5v9t8whhszCnXAghyoqvicDO6u+489JTnBoZCfgOClgiV2KMozsql7Kgz2eGlPRAAHar0MZEf8gFo/6wCtsvnig5Wpq/8uFoGarUfXBxwvWdVOuf4+EAPhT8+b+jgOetF4Z4bmn6VTrkNeY87tIXCN4zpxWZ1ktrKNdfFG/0c10KYsMI9og2nCM3bGdd0=
+    secure: SvLNg70Fs1K5o/AoiSDffNQ/seIFrxn855jyWEG0hScch+Jzn2X5gRhGMVySF9jOPOnSJsIJZLSRBzMGTgmt5Sp0GZeb9nLczHdVJ+nDkJKvprCAakZFX5Pdm/93bJRzjsp486J0Jc1h3wZVj8LRzBsDpT5MvctjXy5EpaOLuFJGnjPRazrj/V3y51SOrqWkkZUTEUEx4UlxcjaNjuryCH4iCtcQbt4LXMUdwunkF4orpNgstCSmDXzZ4/ip4opw8dJ7g9cDE902aj5jRrc8FL2emKNQrijOaGIxYCfouD67MFkUhwfHcEGixfdfVYAWxO3/tIakTs5iT1u5PO2Veo8510BJch3YOx7hko+UZ06e8ZUOdoFxRnpCksTZdCmHn67JW+CZEtyCJgWK1uDhuIyKPJg/gVoWMQ1CfLrgo2oPYzPe2eGVyV8e3hLekN3BRMBgMdx/k2dGLCzqlfuaCqdAIR93KptPo2dpdmUBzdEgEJ1i0VpXEQDS9HmBM57oGI7K4rptKBJ+qyilKHDhrNWr6ILQqoiW/N1R+8zmoEypq8908NY+tVp1NX7lQHL8fidPGTr+q3s+7LGk5fWl0ru4xoOeSES5H71b0YTBUYD9cWNu9VhjerH5O8ivILlwePdXJNXWQpLxf1hokLSP8ObAxgqFfgtKZs1v7+d1ElQ=
   app: bcs-buddy
   on:
     repo: zdurham/bcs-buddy
