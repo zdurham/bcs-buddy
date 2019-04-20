@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - stable
+cache:
+  directories:
+    - node_modules
+before_script: cd server
+install: true
+deploy:
+  provider: heroku
+  api_key:
+    secure: k5LHTdE1b29f2JVI0Pepe3cin6a9qXeg/Aac2gKeZY3iYm7mGUhoaQBNJhZvgclCjmunGO5+jtOHaAqtgVzSKq1lzI90fDtUTIvfGCZUfvZxiXTYVC4ydVx5vpVCf+Wt9kZeJdobMNFzVUuBO8lZo261C/Kt8gEvrIdelSbsr64G1PNC5+xl9tIbc4o8tmwvmu0Z1/Th5p2DDULRstx2yhT59Ntrc3/zNLTpMczkWbfkCWnuisTsoOMH4AAqFhm1y7AnlqRyRerymxMm0QmKuDFrhF0R50gU5XminkTLASI+hELt6a+OG64o0qVhaPusfT+V8itFwNzAs9MStQ6QQa5r9NoS1bIItHHuQLNalp+jJxW9zjPX+Dr3c7gveeUaj6gtX7satjbUZr/EglWKGkb7Ztq8a20sWEM9EVecbKSnbKYfMexHtlEJ8WxtoOpRQgjiQs2S8IMQTbvc/yzTOgZVT9RwvJH0GxNA5P5UTfUBwxBMg9dtuNVbyenOm90nwddSJ+F4JMoWTVOTQ8m7nQMuId+pUrsNVU3ZAdT0j3zQ0aQjIsAW6H/QAiVLhhCIwb9kApxY4ejmfy3wsMjtf7bSrILRHSyzW6my0eZ44MiK/vuMEUE2UAClrrA3OTgHj5Vr2h+DLTj/ZtxUR1LBbzZhrkA9p24zXXi09UelzGk=
+  app:
+    master: bcs-buddy
