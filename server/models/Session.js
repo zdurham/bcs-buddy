@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const SessionSchema = new mongoose.Schema({
   timestamp: {
@@ -9,8 +9,8 @@ const SessionSchema = new mongoose.Schema({
     type: String,
   }
   
-})
+});
 
-const Session = mongoose.model('Session', SessionSchema)
+const Session = mongoose.model('Session', SessionSchema);
 
-module.exports = Session
+module.exports = Session;
