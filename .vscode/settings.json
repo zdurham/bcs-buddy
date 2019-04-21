@@ -1,6 +1,9 @@
 {
 	"editor.formatOnSave": true,
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
+	"cSpell.words": ["linebreak", "readonly"],
+	"eslint.workingDirectories": ["./client", "./server"],
 	"prettier.eslintIntegration": true,
-	"prettier.stylelintIntegration": true,
-	"cSpell.words": ["linebreak", "readonly"]
+	"prettier.stylelintIntegration": true
 }
