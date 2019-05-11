@@ -17,6 +17,7 @@
 	},
 	"devDependencies": {
 		"env-cmd": "^9.0.1",
-		"eslint": "^5.16.0"
+		"eslint": "^5.16.0",
+		"nodemon": "^1.19.0"
 	}
 }
