@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 module.exports.connect = () => {
-  return mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/bcs_db');
+  return mongoose.connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true
+  });
 };
 
 module.exports.models = {

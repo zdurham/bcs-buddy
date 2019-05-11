@@ -4,8 +4,8 @@ const { models } = require('../models');
 module.exports.fetchAuthToken = async (email, password) => {
   try {
     console.log(email, password);
-    console.log(process.env.BASE_URL);
-    const { data } = await axios.post(`${process.env.BASE_URL}/login`, { email, password });
+    console.log(process.env.BCS_URL);
+    const { data } = await axios.post(`${process.env.BCS_URL}/login`, { email, password });
     console.log(data);
     const { authToken } = data.authenticationInfo;
     return [null, authToken];
@@ -15,7 +15,7 @@ module.exports.fetchAuthToken = async (email, password) => {
   }
 };
 
-module.exports.insertAuthToken = async (token) => {
+module.exports.insertAuthToken = async token => {
   try {
     await models.Session.create({ token });
   } catch (err) {
