@@ -2,21 +2,25 @@
 const router = require('express').Router();
 
 const authService = require('../services/authService');
-const { models } = require('../models');
+const Session = require('../models/Session');
 
 router.post('/login', authService, async (req, res) => {
   try {
     const sessionData = {
       userId: req.userId,
       email: req.body.email,
-      bcs_token: req.authToken,
-      token: 'abcd1234'
+      bcs_token: req.authToken
     };
-    const session =
-			(await models.Session.findOne({ userId: req.userId })) ||
-			(await models.Session.create(sessionData));
+    // Location an existing session or create a new session (using upsert)
+    // Note: A new session should only occur the first time after a successful BCS login
+    const session = await Session.findOneAndUpdate({ userId: req.userId }, sessionData, {
+      new: true,
+      upsert: true
+    });
+    // Generate token for new login session
+    const token = await session.generateAuthToken();
 
-    res.status(200).send(session);
+    res.send({ session, token });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
