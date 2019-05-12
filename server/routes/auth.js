@@ -1,33 +1,25 @@
 // here be authentication routes
 const router = require('express').Router();
+
 const authService = require('../services/authService');
+const { models } = require('../models');
 
-router.route('/login').post(async (req, res) => {
+router.post('/login', authService, async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const sessionData = {
+      userId: req.userId,
+      email: req.body.email,
+      bcs_token: req.authToken,
+      token: 'abcd1234'
+    };
+    const session =
+			(await models.Session.findOne({ userId: req.userId })) ||
+			(await models.Session.create(sessionData));
 
-    // get auth token
-    const [authErr, authToken] = await authService.fetchAuthToken(email, password);
-    if (authErr) {
-      throw authErr;
-    }
-    console.log('we have an authtoken: ', authToken);
-
-    // not sure if we really need this
-    // const tokenErr = await authService.insertAuthToken(authToken)
-    // if (tokenErr) {
-    //   throw tokenErr
-    // }
-
-    res.status(200).json(authToken);
+    res.status(200).send(session);
   } catch (err) {
-    // console.log(err, 'the err')
-    res.status(500).json(err);
+    res.status(500).send({ error: err.message });
   }
 });
-
-// router.route('/logout').get(async (req, res) => {
-// console.info(req, res)
-// });
 
 module.exports = router;
