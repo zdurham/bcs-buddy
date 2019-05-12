@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 module.exports.connect = () => {
   return mongoose.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true
   });
 };
 
