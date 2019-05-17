@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const SessionSchema = new mongoose.Schema(
   {
+    // BCS user ID
     userId: {
       type: Number,
       required: true
@@ -13,6 +14,7 @@ const SessionSchema = new mongoose.Schema(
       required: true,
       lowercase: true
     },
+    // Companion app tokens
     tokens: [
       {
         token: {
@@ -21,7 +23,8 @@ const SessionSchema = new mongoose.Schema(
         }
       }
     ],
-    bcs_token: {
+    // BCS issues token
+    userToken: {
       type: String,
       required: true
     }
@@ -41,6 +44,23 @@ SessionSchema.methods.generateAuthToken = async function() {
   await session.save();
 
   return token;
+};
+
+/**
+ * Sanitizes the user object by removing private information before returning to the frontend.
+ * NOTE: This method is NOT called directly. Instead it is called automatically before express
+ * converts the object to a string prior to sending.
+ */
+SessionSchema.methods.toJSON = function() {
+  const session = this;
+  const sessionObj = session.toObject();
+
+  delete sessionObj.__v;
+  delete sessionObj.createdAt;
+  delete sessionObj.tokens;
+  // delete sessionObj.tokens;
+
+  return sessionObj;
 };
 
 const Session = mongoose.model('Session', SessionSchema);

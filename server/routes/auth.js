@@ -9,7 +9,7 @@ router.post('/login', authService, async (req, res) => {
     const sessionData = {
       userId: req.userId,
       email: req.body.email,
-      bcs_token: req.authToken
+      userToken: req.authToken
     };
     // Location an existing session or create a new session (using upsert)
     // Note: A new session should only occur the first time after a successful BCS login
