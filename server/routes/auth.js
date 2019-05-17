@@ -1,10 +1,10 @@
 // here be authentication routes
 const router = require('express').Router();
 
-const authService = require('../services/authService');
+const authRemote = require('../services/authService');
 const Session = require('../models/Session');
 
-router.post('/login', authService, async (req, res) => {
+router.post('/login', authRemote, async (req, res) => {
   try {
     const sessionData = {
       userId: req.userId,

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const authService = async (req, res, next) => {
+const authRemote = async (req, res, next) => {
   try {
     // Fetch data response from Boot Camp Spot (BCS) Login
     const { data } = await axios.post(`${process.env.BCS_URL}/login`, req.body);
@@ -11,7 +11,7 @@ const authService = async (req, res, next) => {
     // If success is true, add BCS userId and authToken to request object
     const { userId, authToken } = data.authenticationInfo;
     req.userId = userId;
-    req.authToken = authToken;
+    req.userToken = authToken;
 
     // Call next process in login route
     next();
@@ -21,4 +21,4 @@ const authService = async (req, res, next) => {
   }
 };
 
-module.exports = authService;
+module.exports = authRemote;
