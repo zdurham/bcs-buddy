@@ -1,7 +1,7 @@
 // here be authentication routes
 const router = require('express').Router();
 
-const authRemote = require('../services/authService');
+const { authRemote, authLocal } = require('../services/authService');
 const Session = require('../models/Session');
 
 router.post('/login', authRemote, async (req, res) => {
@@ -22,6 +22,22 @@ router.post('/login', authRemote, async (req, res) => {
     res.send({ session, token });
   } catch (err) {
     res.status(500).send({ error: err.message });
+  }
+});
+
+router.post('/logout', authLocal, async (req, res) => {
+  try {
+    // Update session tokens by filtering out the active token
+    req.session.tokens = req.session.tokens.filter(token => {
+      return token.token !== req.token;
+    });
+
+    // Update session object with filtered token array
+    await req.session.save();
+
+    res.status(200).send();
+  } catch (error) {
+    res.status(500).send();
   }
 });
 

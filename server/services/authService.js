@@ -1,4 +1,7 @@
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
+
+const Session = require('../models/Session');
 
 const authRemote = async (req, res, next) => {
   try {
@@ -26,4 +29,29 @@ const authRemote = async (req, res, next) => {
   }
 };
 
-module.exports = authRemote;
+const authLocal = async (req, res, next) => {
+  try {
+    // Get Bearer token from header and remove Bearer prefix
+    const token = req.header('Authorization').replace('Bearer ', '');
+    // Decode token using secret phrase
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // Find session with matching decoded id AND existing token in tokens array
+    const session = await Session.findOne({ _id: decoded._id, 'tokens.token': token });
+
+    if (!session) {
+      throw new Error();
+    }
+
+    // If session found, add session to req object for any subsequent API requests
+    req.token = token;
+    req.session = session;
+    next();
+  } catch (error) {
+    res.status(401).send({ error: 'Invalid token.' });
+  }
+};
+
+module.exports = {
+  authRemote,
+  authLocal
+};
