@@ -8,10 +8,15 @@ const authRemote = async (req, res, next) => {
     // If success is false throw error
     if (!data.success) throw new Error();
 
-    // If success is true, add BCS userId and authToken to request object
-    const { userId, authToken } = data.authenticationInfo;
-    req.userId = userId;
-    req.userToken = authToken;
+    // If success is true, add BCS user data to session data
+    const { userId, authToken: userToken } = data.authenticationInfo;
+    const session = {
+      userId,
+      userToken,
+      email: req.body.email
+    };
+
+    req.session = session;
 
     // Call next process in login route
     next();
